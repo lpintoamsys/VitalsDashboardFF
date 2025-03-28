@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import medicalQuotes from "../data/medicalQuotes.json";
+import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * QuoteDisplay Component
@@ -43,14 +44,22 @@ const QuoteDisplay = ({ interval = 30000 }) => {
   if (!quote) return null;
 
   return (
-    <div className="bg-gray-100 p-3 my-3 rounded-lg text-center max-w-full mx-auto shadow-sm">
-      <p className="text-lime-600 font-bold text-lg">
-        <span className="text-blue-500">"</span>
+    <motion.div
+      key={quote.text}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
+    >
+    <div className="bg-gradient-to-r from-teal-400 to-blue-500 p-4 my-4 rounded-xl text-center max-w-md mx-auto shadow-xl transform transition duration-500 hover:scale-105 opacity-100 transition-opacity duration-700">
+      <p className="font-serif text-white text-lg font-medium">
+        <span className="text-white opacity-80">"</span>
         {quote.text}
-        <span className="text-blue-500">"</span> —{" "}
-        <span className="text-blue-500">{quote.author}</span>
+        <span className="text-white opacity-80">"</span> —{" "}
+        <span className="font-bold italic">{quote.author}</span>
       </p>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 

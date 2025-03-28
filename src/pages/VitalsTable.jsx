@@ -178,22 +178,22 @@ const VitalsTable = ({ vitals }) => {
 
                         <div className="overflow-x-auto">
                             <div className="inline-block min-w-full align-middle">
-                                <div className="overflow-hidden">
+                                <div className="overflow-hidden shadow-md rounded-lg">
                                     <div className="overflow-y-auto" style={{ height: 'calc(100vh - 230px)' }}>
                                         <table className="min-w-full divide-y divide-gray-200">
-                                            <thead className="bg-gray-50 sticky top-0 z-10">
+                                            <thead className="bg-gradient-to-r from-indigo-500 to-blue-500 sticky top-0 z-10">
                                                 <tr>
                                                     {['Timestamp', 'First Name', 'Last Name', 'Age', 'Heart Rate', 'Blood Pressure', 'Steps Taken', 'Fitness Level', 'Notes']
                                                         .map((header, index) => (
                                                             <th key={index}
-                                                                className={`px-6 py-3.5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider bg-gray-50 whitespace-nowrap ${header === 'Notes' ? 'min-w-[300px]' : ''}`}
+                                                                className={`px-6 py-3.5 text-left text-xs font-semibold text-white uppercase tracking-wider whitespace-nowrap ${header === 'Notes' ? 'min-w-[300px]' : ''}`}
                                                                 style={{ position: 'sticky', top: 0 }}>
                                                                 {header}
                                                             </th>
                                                         ))}
                                                 </tr>
                                             </thead>
-                                            <tbody className="bg-white divide-y divide-gray-100">
+                                            <tbody className="divide-y divide-gray-100">
                                                 {!Array.isArray(vitals) ? (
                                                     <tr>
                                                         <td colSpan="9" className="px-6 py-4 text-center text-red-500">
@@ -252,7 +252,7 @@ const VitalTableRow = ({ vital, formatTimestamp, getStepActivityStatus, getStepP
     const stepProgress = getStepProgress(vital.stepsTaken || 0);
 
     return (
-        <tr className="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+        <tr className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition-all duration-300 ease-in-out hover:shadow-md transform hover:scale-[1.01]">
             <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900">{timestamp.date}</div>
                 <div className="text-sm text-gray-500">{timestamp.time}</div>
@@ -273,9 +273,9 @@ const VitalTableRow = ({ vital, formatTimestamp, getStepActivityStatus, getStepP
                 <div className={`text-sm ${stepActivity.color}`}>{stepActivity.status}</div>
 
                 {/* Progress bar */}
-                <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1.5">
+                <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                     <div
-                        className={`h-1.5 rounded-full ${stepActivity.color.replace('text-', 'bg-')}`}
+                        className={`h-2 rounded-full ${stepActivity.color.replace('text-', 'bg-')} transition-all duration-500 ease-in-out`}
                         style={{ width: `${stepProgress}%` }}>
                     </div>
                 </div>
